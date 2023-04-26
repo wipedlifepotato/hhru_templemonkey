@@ -1,0 +1,34 @@
+// ==UserScript==
+// @name         AutoClick
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  try to take over the world!
+// @author       You
+// @match        https://*.hh.ru/*
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=hh.ru
+// @grant        none
+// @run-at       document-idle
+
+// ==/UserScript==
+
+(function() {
+    'use strict';
+    window.addEventListener('load', function() {
+        const node = document.createElement("button");
+        const textnode = document.createTextNode("отметить_всё");
+        node.appendChild(textnode);
+        const root = document.getElementById("HH-React-Root")
+        root.prepend(node)
+        root.appendChild(node)
+        var AutoClickWork = function() {
+            for( var i = 0; i < document.getElementsByClassName("serp-item-controls").length; i++) { var but = document.getElementsByClassName("serp-item-controls")[i].children[0].click() }
+        };
+        var AutoReloadPage = function() {
+            document.getElementsByClassName("supernova-search-submit-text")[0].click();
+        };
+        node.onclick = function() {
+            setTimeout(AutoReloadPage, 25000);
+            setTimeout(AutoClickWork, 3000);
+        };
+    }, false);
+})();
